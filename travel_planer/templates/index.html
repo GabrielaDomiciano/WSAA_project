@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Planejador de Viagens</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        form input, form button { margin: 5px; }
+        li { margin: 10px 0; }
+        button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Minhas Viagens</h1>
+
+    <form id="tripForm">
+        <input type="text" name="trip_name" placeholder="Nome da viagem" required>
+        <input type="text" name="destination" placeholder="Destino" required>
+        <input type="date" name="start_date">
+        <input type="date" name="end_date">
+        <button type="submit">Adicionar viagem</button>
+    </form>
+
+    <h2>Lista de Viagens</h2>
+    <ul id="tripList"></ul>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
