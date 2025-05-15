@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Trips</h1>
-    <div><button id="button-showCreate" onclick="showCreate()">Create a Trip</button><br/><br/></div>
+
+    <div>
+        <button id="button-showCreate" onclick="showCreate()">Create a trip</button><br/><br/>
+    </div>
 
     <div>
         <table border="1" id="tripTable">
@@ -19,12 +22,16 @@
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
+            <!-- Rows will be added dynamically -->
         </table>
         <br/>
     </div>
 
     <div id="createUpdateForm" style="display:none">
-        <h2><span id="createLabel">Create a</span> <span id="updateLabel">Update this</span> Trip</h2>
+        <h2>
+            <span id="createLabel">Create a</span>
+            <span id="updateLabel" style="display:none">Update this</span> trip
+        </h2>
         ID <input type="text" name="id"><br/>
         Trip Name <input type="text" name="trip_name"><br/>
         Destination <input type="text" name="destination"><br/>
@@ -32,11 +39,12 @@
         End Date <input type="date" name="end_date"><br/>
 
         <span><button id="button-doCreate" onclick="doCreate()">Create</button></span>
-        <span><button id="button-doUpdate" onclick="doUpdate()">Update</button></span>
+        <span><button id="button-doUpdate" onclick="doUpdate()" style="display:none">Update</button></span>
+        <br/><br/>
+        <button onclick="showViewAll()">Cancel</button>
     </div>
 
     <script src="/static/script.js"></script>
 </body>
 </html>
-
 
