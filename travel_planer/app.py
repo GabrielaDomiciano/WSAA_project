@@ -1,9 +1,20 @@
 from flask import Flask, request, jsonify, render_template
 import sqlite3
 
+#Flask: The main web framework you're using.
+#request: Lets you access data sent from the frontend (like form data).
+#jsonify: Converts Python data to JSON to send to the frontend.
+#render_template: Renders HTML files.
+#sqlite3: Built-in Python module to use a SQLite database.
+
+#creates your Flask app
 app = Flask(__name__)
 
-# Criação automática do banco de dados
+# database creation
+#Connects to the SQLite database file travel.db.
+#Creates a table called trips if it doesn't already exist.
+#Each trip has an ID, name, destination, start date, and end date
+
 def init_db():
     conn = sqlite3.connect('travel.db')
     cursor = conn.cursor()
@@ -19,12 +30,12 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Rota principal
+# Main route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# API: obter todas as viagens
+# API: Get all trips
 @app.route('/api/trips', methods=['GET'])
 def get_trips():
     conn = sqlite3.connect('travel.db')
@@ -34,7 +45,7 @@ def get_trips():
     conn.close()
     return jsonify(trips)
 
-# API: adicionar uma nova viagem
+# API: Add a new trip
 @app.route('/api/trips', methods=['POST'])
 def add_trip():
     data = request.get_json()
@@ -46,7 +57,7 @@ def add_trip():
     conn.close()
     return jsonify({'message': 'Viagem adicionada com sucesso'})
 
-# Executa o app
+# Run the app
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
