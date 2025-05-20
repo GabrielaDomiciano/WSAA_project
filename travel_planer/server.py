@@ -6,7 +6,7 @@ import sqlite3
 # Cria o app Flask
 app = Flask(__name__)
 
-# Cria o banco de dados automaticamente (se não existir)
+# Cria o banco de dados automaticamente.
 def init_db():
     conn = sqlite3.connect('travel.db')
     cursor = conn.cursor()
