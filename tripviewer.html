@@ -58,10 +58,10 @@
                 rows += `
                     <tr data-id="${trip.id}">
                         <td>${trip.id}</td>
-                        <td><input class="form-control form-control-sm" value="${trip.trip_name}"></td>
-                        <td><input class="form-control form-control-sm" value="${trip.destination}"></td>
-                        <td><input type="date" class="form-control form-control-sm" value="${trip.start_date}"></td>
-                        <td><input type="date" class="form-control form-control-sm" value="${trip.end_date}"></td>
+                        <td><input class="form-control form-control-sm" value="${trip.trip_name}" disabled></td>
+                        <td><input class="form-control form-control-sm" value="${trip.destination}" disabled></td>
+                        <td><input type="date" class="form-control form-control-sm" value="${trip.start_date}" disabled></td>
+                        <td><input type="date" class="form-control form-control-sm" value="${trip.end_date}" disabled></td>
                         <td>
                             <button class="btn btn-sm btn-primary update-btn">Update</button>
                             <button class="btn btn-sm btn-danger delete-btn">Delete</button>
@@ -97,25 +97,32 @@
             });
         });
 
-        // Update trip
+        // Update (edit & save) trip
         $("#trip-table-body").on("click", ".update-btn", function() {
             const row = $(this).closest("tr");
-            const id = row.data("id");
-            const trip = {
-                trip_name: row.find("td:eq(1) input").val(),
-                destination: row.find("td:eq(2) input").val(),
-                start_date: row.find("td:eq(3) input").val(),
-                end_date: row.find("td:eq(4) input").val()
-            };
-            $.ajax({
-                url: `/trips/${id}`,
-                method: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify(trip),
-                success: function() {
-                    loadTrips();
-                }
-            });
+            const inputs = row.find("input");
+
+            if ($(this).text() === "Update") {
+                inputs.prop("disabled", false);
+                $(this).text("Save").removeClass("btn-primary").addClass("btn-warning");
+            } else {
+                const id = row.data("id");
+                const trip = {
+                    trip_name: inputs.eq(0).val(),
+                    destination: inputs.eq(1).val(),
+                    start_date: inputs.eq(2).val(),
+                    end_date: inputs.eq(3).val()
+                };
+                $.ajax({
+                    url: `/trips/${id}`,
+                    method: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(trip),
+                    success: function() {
+                        loadTrips();
+                    }
+                });
+            }
         });
 
         // Delete trip
@@ -136,5 +143,4 @@
 </script>
 </body>
 </html>
-
 
