@@ -3,26 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>Trip Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>My Trips</h1>
-    <ul id="trip-list"></ul>
+<body class="bg-light">
+<div class="container py-4">
+    <h1 class="text-center text-primary mb-4">My Trips</h1>
 
-    <script>
-        fetch("/trips")
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById("trip-list");
-                data.forEach(trip => {
-                    const li = document.createElement("li");
-                    li.textContent = `${trip.trip_name} → ${trip.destination} (${trip.start_date} to ${trip.end_date})`;
-                    list.appendChild(li);
-                });
-            })
-            .catch(error => {
-                console.error("Error loading trips:", error);
+    <!-- Add Trip Form -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">Add New Trip</div>
+        <div class="card-body">
+            <form id="trip-form" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="trip_name" placeholder="Trip Name" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="destination" placeholder="Destination" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" id="start_date" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" id="end_date" required>
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-success">Add Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Trip Table -->
+    <table class="table table-striped table-bordered shadow-sm bg-white">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Trip Name</th>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="trip-table-body"></tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function loadTrips() {
+        $.get("/trips", function(data) {
+            let rows = "";
+            data.forEach(trip => {
+                rows += `
+                    <tr data-id="${trip.id}">
+                        <td>${trip.id}</td>
+                        <td><input class="form-control form-control-sm" value="${trip.trip_name}"></td>
+                        <td><input class="form-control form-control-sm" value="${trip.destination}"></td>
+                        <td><input type="date" class="form-control form-control-sm" value="${trip.start_date}"></td>
+                        <td><input type="date" class="form-control form-control-sm" value="${trip.end_date}"></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary update-btn">Update</button>
+                            <button class="btn btn-sm btn-danger delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `;
             });
-    </script>
+            $("#trip-table-body").html(rows);
+        });
+    }
+
+    $(document).ready(function() {
+        loadTrips();
+
+        // Add new trip
+        $("#trip-form").on("submit", function(e) {
+            e.preventDefault();
+            const trip = {
+                trip_name: $("#trip_name").val(),
+                destination: $("#destination").val(),
+                start_date: $("#start_date").val(),
+                end_date: $("#end_date").val()
+            };
+            $.ajax({
+                url: "/trips",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(trip),
+                success: function() {
+                    loadTrips();
+                    $("#trip-form")[0].reset();
+                }
+            });
+        });
+
+        // Update trip
+        $("#trip-table-body").on("click", ".update-btn", function() {
+            const row = $(this).closest("tr");
+            const id = row.data("id");
+            const trip = {
+                trip_name: row.find("td:eq(1) input").val(),
+                destination: row.find("td:eq(2) input").val(),
+                start_date: row.find("td:eq(3) input").val(),
+                end_date: row.find("td:eq(4) input").val()
+            };
+            $.ajax({
+                url: `/trips/${id}`,
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(trip),
+                success: function() {
+                    loadTrips();
+                }
+            });
+        });
+
+        // Delete trip
+        $("#trip-table-body").on("click", ".delete-btn", function() {
+            const row = $(this).closest("tr");
+            const id = row.data("id");
+            if (confirm("Are you sure you want to delete this trip?")) {
+                $.ajax({
+                    url: `/trips/${id}`,
+                    method: "DELETE",
+                    success: function() {
+                        loadTrips();
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>
+
 
