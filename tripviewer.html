@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Trip Viewer</title>
 </head>
 <body>
-    <h1>Minhas Viagens</h1>
+    <h1>My Trips</h1>
     <ul id="trip-list"></ul>
 
     <script>
@@ -15,13 +15,14 @@
                 const list = document.getElementById("trip-list");
                 data.forEach(trip => {
                     const li = document.createElement("li");
-                    li.textContent = `${trip.trip_name} → ${trip.destination} (${trip.start_date} a ${trip.end_date})`;
+                    li.textContent = `${trip.trip_name} → ${trip.destination} (${trip.start_date} to ${trip.end_date})`;
                     list.appendChild(li);
                 });
             })
             .catch(error => {
-                console.error("Erro ao carregar viagens:", error);
+                console.error("Error loading trips:", error);
             });
     </script>
 </body>
 </html>
+

@@ -10,17 +10,17 @@ def home():
     return render_template("tripviewer.html")
 
 @app.route('/trips')
-def getAll():
-    results = travelDAO.getAll()
-    return jsonify(results)
+def get_all_trips():
+    trips = travelDAO.getAll()
+    return jsonify(trips)
 
 @app.route('/trips/<int:id>')
-def findById(id):
+def get_trip_by_id(id):
     trip = travelDAO.findByID(id)
     return jsonify(trip) if trip else (jsonify({}), 404)
 
 @app.route('/trips', methods=['POST'])
-def create():
+def create_trip():
     if not request.json:
         abort(400)
     trip = {
@@ -33,7 +33,7 @@ def create():
     return jsonify(new_trip)
 
 @app.route('/trips/<int:id>', methods=['PUT'])
-def update(id):
+def update_trip(id):
     if not request.json:
         abort(400)
     trip = {
@@ -47,10 +47,11 @@ def update(id):
     return jsonify(trip)
 
 @app.route('/trips/<int:id>', methods=['DELETE'])
-def delete(id):
+def delete_trip(id):
     travelDAO.delete(id)
     return jsonify({"done": True})
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
