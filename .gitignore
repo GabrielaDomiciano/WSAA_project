@@ -154,7 +154,7 @@ dmypy.json
 venv/
 __pycache__/
 *.pyc
-dbconfig.py
+
 travel.db
 
 # Pyre type checker
