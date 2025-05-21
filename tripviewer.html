@@ -7,7 +7,8 @@
 </head>
 <body class="bg-light">
 <div class="container py-4">
-    <h1 class="text-center text-primary mb-4">My Trips</h1>
+    <h1 class="text-center text-primary mb-1">My Trips</h1>
+    <p class="text-center text-muted mb-4">Add your trips and create your personal travel log.</p>
 
     <!-- Add Trip Form -->
     <div class="card mb-4">
@@ -97,7 +98,7 @@
             });
         });
 
-        // Update (edit & save) trip
+        // Update trip (toggle between edit and save)
         $("#trip-table-body").on("click", ".update-btn", function() {
             const row = $(this).closest("tr");
             const inputs = row.find("input");
