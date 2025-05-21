@@ -151,6 +151,12 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+venv/
+__pycache__/
+*.pyc
+dbconfig.py
+travel.db
+
 # Pyre type checker
 .pyre/
 
@@ -175,3 +181,5 @@ cython_debug/
 venv/
 .DS_Store
 git rm --cached .DS_Store
+.dbconfig.py
+dbconfig.py
