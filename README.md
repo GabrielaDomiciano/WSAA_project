@@ -12,6 +12,8 @@
 # My Project Repository
 **by Gabriela Domiciano Avellar**
 
+**I study at [ATU](https://www.atu.ie).**
+
 # 📁 Project Travel Log -  Web Services and Applications
 
 
@@ -42,3 +44,46 @@ wsaa_project/
 A `dbconfig.py` has the MySQL connection credentials.  
 It was not uploaded to GitHub for security reasons, and it is listed in gitignore.  
 The file was manually uploaded to PythonAnywhere for deployment.
+
+
+### 🧪 To run locally 
+
+Clone the repository
+- git clone [GitHub](https://github.com/GabrielaDomiciano/WSAA_project).
+
+Create and Activate Virtual Environment
+- python -m venv venv
+
+- source venv/bin/activate   # On Windows use venv\Scripts\activate
+
+Install Dependencies
+
+- pip install -r requirements.txt.
+
+Create a table in your MySQL server
+
+Update your MySQL credentials in dbconfig.py.
+
+### 📚 References
+
+The main reference for this project was the content and examples provided by the professor during the semester
+
+Andrew Beatty Courseware: https://github.com/andrewbeattycourseware/wsaa-courseware
+
+Andrew Beatty deploytopythonanywhere: https://github.com/andrewbeattycourseware/deploytopythonanywhere 
+
+The lessons from professor Gerard Harrison in the Applied Databases module were also important, especially for database design and SQL structure.
+
+Flask Documentation: https://flask.palletsprojects.com/ - Used to understand route creation, JSON responses, and general API structure.
+
+MySQL Connector: https://pypi.org/project/mysql-connector-python/ - Helped with database connection setup and executing secure SQL queries
+
+Bootstrap: https://getbootstrap.com/ - Provided styling and layout components such as buttons, tables, forms, and alerts.
+
+jQuery: https://jquery.com/ - Used for DOM manipulation and AJAX calls to interact with the API from the frontend.
+
+W3Schools Tutorial: https://www.w3schools.com/python/python_mysql_getstarted.asp
+
+Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application.
+
+PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8
