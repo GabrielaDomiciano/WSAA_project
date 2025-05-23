@@ -74,17 +74,17 @@
                     default: categoryName = 'Unknown';
                 }
 
-                rows += '<tr data-id="' + trip.id + '">';
-                rows += '<td>' + trip.id + '</td>';
-                rows += '<td><input class="form-control form-control-sm" value="' + trip.trip_name + '" disabled></td>';
-                rows += '<td><input class="form-control form-control-sm" value="' + trip.destination + '" disabled></td>';
-                rows += '<td><input type="date" class="form-control form-control-sm" value="' + trip.start_date + '" disabled></td>';
-                rows += '<td><input type="date" class="form-control form-control-sm" value="' + trip.end_date + '" disabled></td>';
-                rows += '<td>' + categoryName + '</td>';
-                rows += '<td>';
-                rows += '<button class="btn btn-sm btn-primary update-btn">Update</button> ';
-                rows += '<button class="btn btn-sm btn-danger delete-btn">Delete</button>';
-                rows += '</td></tr>';
+                rows += `<tr data-id="${trip.id}" data-category-id="${trip.category_id}">`;
+                rows += `<td>${trip.id}</td>`;
+                rows += `<td><input class="form-control form-control-sm" value="${trip.trip_name}" disabled></td>`;
+                rows += `<td><input class="form-control form-control-sm" value="${trip.destination}" disabled></td>`;
+                rows += `<td><input type="date" class="form-control form-control-sm" value="${trip.start_date}" disabled></td>`;
+                rows += `<td><input type="date" class="form-control form-control-sm" value="${trip.end_date}" disabled></td>`;
+                rows += `<td>${categoryName}</td>`;
+                rows += `<td>`;
+                rows += `<button class="btn btn-sm btn-primary update-btn">Update</button> `;
+                rows += `<button class="btn btn-sm btn-danger delete-btn">Delete</button>`;
+                rows += `</td></tr>`;
             });
             $("#trip-table-body").html(rows);
         });
@@ -101,7 +101,7 @@
                 destination: $("#destination").val(),
                 start_date: $("#start_date").val(),
                 end_date: $("#end_date").val(),
-                category_id: parseInt($("#category_id").val()) // Aqui corrigido para garantir que seja número
+                category_id: $("#category_id").val()
             };
             $.ajax({
                 url: "/trips",
@@ -119,6 +119,7 @@
         $("#trip-table-body").on("click", ".update-btn", function() {
             const row = $(this).closest("tr");
             const inputs = row.find("input");
+            const categoryId = row.data("category-id");
 
             if ($(this).text() === "Update") {
                 inputs.prop("disabled", false);
@@ -130,7 +131,7 @@
                     destination: inputs.eq(1).val(),
                     start_date: inputs.eq(2).val(),
                     end_date: inputs.eq(3).val(),
-                    category_id: parseInt($("#category_id").val()) // mesmo ajuste aqui se estiver usando select
+                    category_id: parseInt(categoryId)
                 };
                 $.ajax({
                     url: `/trips/${id}`,
@@ -162,3 +163,4 @@
 </script>
 </body>
 </html>
+
