@@ -65,27 +65,26 @@
         $.get("/trips", function(data) {
             let rows = "";
             data.forEach(trip => {
-                rows += `
-                    <tr data-id="${trip.id}">
-                        <td>${trip.id}</td>
-                        <td><input class="form-control form-control-sm" value="${trip.trip_name}" disabled></td>
-                        <td><input class="form-control form-control-sm" value="${trip.destination}" disabled></td>
-                        <td><input type="date" class="form-control form-control-sm" value="${trip.start_date}" disabled></td>
-                        <td><input type="date" class="form-control form-control-sm" value="${trip.end_date}" disabled></td>
-                        <td>
-                            <select class="form-control form-control-sm" disabled>
-                                <option value="1" ${trip.category_id == 1 ? 'selected' : ''}>Leisure</option>
-                                <option value="2" ${trip.category_id == 2 ? 'selected' : ''}>Business</option>
-                                <option value="3" ${trip.category_id == 3 ? 'selected' : ''}>Family</option>
-                                <option value="4" ${trip.category_id == 4 ? 'selected' : ''}>Study</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-primary update-btn">Update</button>
-                            <button class="btn btn-sm btn-danger delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                `;
+                let categoryName = '';
+                switch (parseInt(trip.category_id)) {
+                    case 1: categoryName = 'Leisure'; break;
+                    case 2: categoryName = 'Business'; break;
+                    case 3: categoryName = 'Family'; break;
+                    case 4: categoryName = 'Study'; break;
+                    default: categoryName = 'Unknown';
+                }
+
+                rows += '<tr data-id="' + trip.id + '">';
+                rows += '<td>' + trip.id + '</td>';
+                rows += '<td><input class="form-control form-control-sm" value="' + trip.trip_name + '" disabled></td>';
+                rows += '<td><input class="form-control form-control-sm" value="' + trip.destination + '" disabled></td>';
+                rows += '<td><input type="date" class="form-control form-control-sm" value="' + trip.start_date + '" disabled></td>';
+                rows += '<td><input type="date" class="form-control form-control-sm" value="' + trip.end_date + '" disabled></td>';
+                rows += '<td>' + categoryName + '</td>';
+                rows += '<td>';
+                rows += '<button class="btn btn-sm btn-primary update-btn">Update</button> ';
+                rows += '<button class="btn btn-sm btn-danger delete-btn">Delete</button>';
+                rows += '</td></tr>';
             });
             $("#trip-table-body").html(rows);
         });
@@ -119,7 +118,7 @@
         // Update trip (toggle between edit and save)
         $("#trip-table-body").on("click", ".update-btn", function() {
             const row = $(this).closest("tr");
-            const inputs = row.find("input, select");
+            const inputs = row.find("input");
 
             if ($(this).text() === "Update") {
                 inputs.prop("disabled", false);
@@ -131,7 +130,7 @@
                     destination: inputs.eq(1).val(),
                     start_date: inputs.eq(2).val(),
                     end_date: inputs.eq(3).val(),
-                    category_id: inputs.eq(4).val()
+                    category_id: $("#category_id").val() // mantém o select principal
                 };
                 $.ajax({
                     url: `/trips/${id}`,
@@ -163,5 +162,3 @@
 </script>
 </body>
 </html>
-
-
