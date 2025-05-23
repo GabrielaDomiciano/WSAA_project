@@ -5,7 +5,8 @@ import sys
 import os
 
 # Define the full path to your project directory
-project_home = '/home/gabidomiciano/wsaa_project'
+project_home = '/home/gabidomiciano/WSAA_project'
+
 if project_home not in sys.path:
     sys.path.insert(0, project_home)
 
