@@ -1,5 +1,5 @@
 # travelDAO.py
-# MySQL data access layer for trips (following professor's DAO style)
+# MySQL data access layer for trips (with category_id support)
 
 import mysql.connector
 import dbconfig as cfg
@@ -51,8 +51,8 @@ class TravelDAO:
 
     def create(self, trip):
         cursor = self.get_cursor()
-        sql = "INSERT INTO trips (trip_name, destination, start_date, end_date) VALUES (%s, %s, %s, %s)"
-        values = (trip["trip_name"], trip["destination"], trip["start_date"], trip["end_date"])
+        sql = "INSERT INTO trips (trip_name, destination, start_date, end_date, category_id) VALUES (%s, %s, %s, %s, %s)"
+        values = (trip["trip_name"], trip["destination"], trip["start_date"], trip["end_date"], trip["category_id"])
         cursor.execute(sql, values)
         self.connection.commit()
         trip["id"] = cursor.lastrowid
@@ -61,8 +61,8 @@ class TravelDAO:
 
     def update(self, id, trip):
         cursor = self.get_cursor()
-        sql = "UPDATE trips SET trip_name = %s, destination = %s, start_date = %s, end_date = %s WHERE id = %s"
-        values = (trip["trip_name"], trip["destination"], trip["start_date"], trip["end_date"], id)
+        sql = "UPDATE trips SET trip_name = %s, destination = %s, start_date = %s, end_date = %s, category_id = %s WHERE id = %s"
+        values = (trip["trip_name"], trip["destination"], trip["start_date"], trip["end_date"], trip["category_id"], id)
         cursor.execute(sql, values)
         self.connection.commit()
         self.close_all()
@@ -74,10 +74,11 @@ class TravelDAO:
         self.close_all()
 
     def convert_to_dict(self, row):
-        keys = ["id", "trip_name", "destination", "start_date", "end_date"]
+        keys = ["id", "trip_name", "destination", "start_date", "end_date", "category_id"]
         return {keys[i]: row[i] for i in range(len(keys))}
 
 # Create DAO instance to be imported in server.py
 travelDAO = TravelDAO()
+
 
 

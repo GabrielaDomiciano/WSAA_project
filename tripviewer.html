@@ -15,10 +15,10 @@
         <div class="card-header bg-success text-white">Add New Trip</div>
         <div class="card-body">
             <form id="trip-form" class="row g-3">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input type="text" class="form-control" id="trip_name" placeholder="Trip Name" required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input type="text" class="form-control" id="destination" placeholder="Destination" required>
                 </div>
                 <div class="col-md-2">
@@ -26,6 +26,14 @@
                 </div>
                 <div class="col-md-2">
                     <input type="date" class="form-control" id="end_date" required>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="category_id" required>
+                        <option value="1">Leisure</option>
+                        <option value="2">Business</option>
+                        <option value="3">Family</option>
+                        <option value="4">Study</option>
+                    </select>
                 </div>
                 <div class="col-12 text-end">
                     <button type="submit" class="btn btn-success">Add Trip</button>
@@ -43,6 +51,7 @@
                 <th>Destination</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -64,6 +73,14 @@
                         <td><input type="date" class="form-control form-control-sm" value="${trip.start_date}" disabled></td>
                         <td><input type="date" class="form-control form-control-sm" value="${trip.end_date}" disabled></td>
                         <td>
+                            <select class="form-control form-control-sm" disabled>
+                                <option value="1" ${trip.category_id == 1 ? 'selected' : ''}>Leisure</option>
+                                <option value="2" ${trip.category_id == 2 ? 'selected' : ''}>Business</option>
+                                <option value="3" ${trip.category_id == 3 ? 'selected' : ''}>Family</option>
+                                <option value="4" ${trip.category_id == 4 ? 'selected' : ''}>Study</option>
+                            </select>
+                        </td>
+                        <td>
                             <button class="btn btn-sm btn-primary update-btn">Update</button>
                             <button class="btn btn-sm btn-danger delete-btn">Delete</button>
                         </td>
@@ -84,7 +101,8 @@
                 trip_name: $("#trip_name").val(),
                 destination: $("#destination").val(),
                 start_date: $("#start_date").val(),
-                end_date: $("#end_date").val()
+                end_date: $("#end_date").val(),
+                category_id: $("#category_id").val()
             };
             $.ajax({
                 url: "/trips",
@@ -101,7 +119,7 @@
         // Update trip (toggle between edit and save)
         $("#trip-table-body").on("click", ".update-btn", function() {
             const row = $(this).closest("tr");
-            const inputs = row.find("input");
+            const inputs = row.find("input, select");
 
             if ($(this).text() === "Update") {
                 inputs.prop("disabled", false);
@@ -112,7 +130,8 @@
                     trip_name: inputs.eq(0).val(),
                     destination: inputs.eq(1).val(),
                     start_date: inputs.eq(2).val(),
-                    end_date: inputs.eq(3).val()
+                    end_date: inputs.eq(3).val(),
+                    category_id: inputs.eq(4).val()
                 };
                 $.ajax({
                     url: `/trips/${id}`,
@@ -144,4 +163,5 @@
 </script>
 </body>
 </html>
+
 
