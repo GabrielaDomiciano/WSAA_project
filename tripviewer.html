@@ -101,7 +101,7 @@
                 destination: $("#destination").val(),
                 start_date: $("#start_date").val(),
                 end_date: $("#end_date").val(),
-                category_id: $("#category_id").val()
+                category_id: parseInt($("#category_id").val()) // Aqui corrigido para garantir que seja número
             };
             $.ajax({
                 url: "/trips",
@@ -130,7 +130,7 @@
                     destination: inputs.eq(1).val(),
                     start_date: inputs.eq(2).val(),
                     end_date: inputs.eq(3).val(),
-                    category_id: $("#category_id").val() // mantém o select principal
+                    category_id: parseInt($("#category_id").val()) // mesmo ajuste aqui se estiver usando select
                 };
                 $.ajax({
                     url: `/trips/${id}`,
