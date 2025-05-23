@@ -46,7 +46,7 @@ It was not uploaded to GitHub for security reasons, and it is listed in gitignor
 The file was manually uploaded to PythonAnywhere for deployment.
 
 
-### 🧪 To run locally 
+### 💻 To run locally 
 
 Clone the repository
 - git clone [GitHub](https://github.com/GabrielaDomiciano/WSAA_project).
@@ -63,6 +63,17 @@ Install Dependencies
 Create a table in your MySQL server
 
 Update your MySQL credentials in dbconfig.py.
+
+
+### 🌐 Access the App
+
+You can access the live version of the project here:
+
+[Travel Log](https://gabidomiciano.pythonanywhere.com)
+
+> No installation required — the app is hosted on PythonAnywhere and ready to use.
+
+
 
 ### 📚 References
 
@@ -87,3 +98,5 @@ W3Schools Tutorial: https://www.w3schools.com/python/python_mysql_getstarted.asp
 Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application.
 
 PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8
+
+You will find additional references throughout the project files
