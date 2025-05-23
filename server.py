@@ -28,6 +28,7 @@ def create_trip():
         "destination": request.json['destination'],
         "start_date": request.json['start_date'],
         "end_date": request.json['end_date'],
+        "category_id": request.json['category_id']
     }
     new_trip = travelDAO.create(trip)
     return jsonify(new_trip)
@@ -41,6 +42,7 @@ def update_trip(id):
         "destination": request.json['destination'],
         "start_date": request.json['start_date'],
         "end_date": request.json['end_date'],
+        "category_id": request.json['category_id']
     }
     travelDAO.update(id, trip)
     trip["id"] = id
@@ -53,5 +55,6 @@ def delete_trip(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
