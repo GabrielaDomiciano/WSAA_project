@@ -97,7 +97,7 @@ Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutori
 
 PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8
 
-AI tools were used to assist with debugging, such as fixing JSON handling issues and optimizing the update route logic, when data sent or received by the API was not being read correctly in JavaScript or Flask.
+AI tools, AI available in VS Code, were used to assist with debugging, such as fixing JSON handling issues and optimizing the update route logic, when data sent or received by the API was not being read correctly in JavaScript or Flask.
 
 
 ###### You will find comments throughout the project files.
