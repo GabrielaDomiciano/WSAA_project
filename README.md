@@ -75,30 +75,30 @@ You can access the live version of the project here:
 
 ### 📚 References
 
-The main reference for this project was the content and examples provided by the professor during the semester
+The main reference for this project was the content and examples provided by the professor during the semester.
 
-Andrew Beatty Courseware: https://github.com/andrewbeattycourseware/wsaa-courseware
+Andrew Beatty Courseware: https://github.com/andrewbeattycourseware/wsaa-courseware.
 
-Andrew Beatty deploytopythonanywhere: https://github.com/andrewbeattycourseware/deploytopythonanywhere 
+Andrew Beatty deploytopythonanywhere: https://github.com/andrewbeattycourseware/deploytopythonanywhere .
 
 The lessons from professor Gerard Harrison in the Applied Databases module were also important, especially for database design and SQL structure.
 
 Flask Documentation: https://flask.palletsprojects.com/ - Used to understand route creation, JSON responses, and general API structure.
 
-MySQL Connector: https://pypi.org/project/mysql-connector-python/ - Helped with database connection setup and executing secure SQL queries
+MySQL Connector: https://pypi.org/project/mysql-connector-python/ - Helped with database connection setup and executing secure SQL queries.
 
 Bootstrap: https://getbootstrap.com/ - Provided styling and layout components such as buttons, tables, forms, and alerts.
 
 jQuery: https://jquery.com/ - Used for DOM manipulation and AJAX calls to interact with the API from the frontend.
 
-W3Schools Tutorial: https://www.w3schools.com/python/python_mysql_getstarted.asp
+W3Schools Tutorial: https://www.w3schools.com/python/python_mysql_getstarted.asp.
 
-Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application.
+Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutorials/.how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application.
 
-PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8
+PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8.
 
 Used AI tools, including the one available in VS Code, to help debug issues such as JSON data not being saved or updated correctly in Flask, even when no errors appeared in the browser.
-Example prompt: My Flask app on PythonAnywhere is not saving data. The HTML form and JavaScript look fine. What could be wrong? My Update button changes to Save, I send the data with JavaScript, but the database doesn't update. Everything seems correct
+Example prompt: My Flask app on PythonAnywhere is not saving data. The HTML form and JavaScript look fine. What could be wrong? My Update button changes to Save, I send the data with JavaScript, but the database doesn't update. Everything seems correct.
 
 
 ###### You will find comments throughout the project files.
