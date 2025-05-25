@@ -97,7 +97,8 @@ Digital Ocean Flask + MySQL Guide: https://www.digitalocean.com/community/tutori
 
 PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4np8
 
-AI tools, AI available in VS Code, were used to assist with debugging, such as fixing JSON handling issues and optimizing the update route logic, when data sent or received by the API was not being read correctly in JavaScript or Flask.
+Used AI tools, including the one available in VS Code, to help debug issues such as JSON data not being saved or updated correctly in Flask, even when no errors appeared in the browser.
+Example prompt: My Flask app on PythonAnywhere is not saving data. The HTML form and JavaScript look fine. What could be wrong? My Update button changes to Save, I send the data with JavaScript, but the database doesn't update. Everything seems correct
 
 
 ###### You will find comments throughout the project files.
