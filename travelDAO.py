@@ -1,23 +1,19 @@
 # travelDAO.py
-# MySQL data access layer for trips (with category_id support)
+# This file defines a DAO (Data Access Object) class for managing trip records in a MySQL database.
+# It supports basic CRUD operations: Create, Read, Update, Delete.
 
-import mysql.connector
-import dbconfig as cfg
+import mysql.connector  # MySQL connector library
+import dbconfig as cfg  # Database config with credentials
 
 class TravelDAO:
-    connection = ""
-    cursor = ""
-    host = ""
-    user = ""
-    password = ""
-    database = ""
-
+    # Initialize database credentials from config
     def __init__(self):
         self.host = cfg.mysql['host']
         self.user = cfg.mysql['user']
         self.password = cfg.mysql['password']
         self.database = cfg.mysql['database']
 
+    # Create and return a new DB cursor
     def get_cursor(self):
         self.connection = mysql.connector.connect(
             host=self.host,
@@ -28,20 +24,21 @@ class TravelDAO:
         self.cursor = self.connection.cursor()
         return self.cursor
 
+    # Close DB connection and cursor
     def close_all(self):
         self.cursor.close()
         self.connection.close()
 
+    # Return all trips from DB
     def getAll(self):
         cursor = self.get_cursor()
         cursor.execute("SELECT * FROM trips")
         results = cursor.fetchall()
-        trips = []
-        for row in results:
-            trips.append(self.convert_to_dict(row))
+        trips = [self.convert_to_dict(row) for row in results]
         self.close_all()
         return trips
 
+    # Return a single trip by ID
     def findByID(self, id):
         cursor = self.get_cursor()
         cursor.execute("SELECT * FROM trips WHERE id = %s", (id,))
@@ -49,6 +46,7 @@ class TravelDAO:
         self.close_all()
         return self.convert_to_dict(result) if result else None
 
+    # Insert a new trip
     def create(self, trip):
         cursor = self.get_cursor()
         sql = "INSERT INTO trips (trip_name, destination, start_date, end_date, category_id) VALUES (%s, %s, %s, %s, %s)"
@@ -59,6 +57,7 @@ class TravelDAO:
         self.close_all()
         return trip
 
+    # Update a trip by ID
     def update(self, id, trip):
         cursor = self.get_cursor()
         sql = "UPDATE trips SET trip_name = %s, destination = %s, start_date = %s, end_date = %s, category_id = %s WHERE id = %s"
@@ -67,18 +66,17 @@ class TravelDAO:
         self.connection.commit()
         self.close_all()
 
+    # Delete a trip by ID
     def delete(self, id):
         cursor = self.get_cursor()
         cursor.execute("DELETE FROM trips WHERE id = %s", (id,))
         self.connection.commit()
         self.close_all()
 
+    # Convert DB row to dictionary
     def convert_to_dict(self, row):
         keys = ["id", "trip_name", "destination", "start_date", "end_date", "category_id"]
         return {keys[i]: row[i] for i in range(len(keys))}
 
-# Create DAO instance to be imported in server.py
+# DAO instance to be used in other files
 travelDAO = TravelDAO()
-
-
-

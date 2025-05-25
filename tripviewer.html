@@ -1,8 +1,15 @@
+<!-- 
+# tripviewer.html
+# Web interface to view, add, update, and delete trips.
+# Uses Bootstrap for styling and jQuery for API communication with Flask.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Trip Viewer</title>
+    <!-- # Bootstrap CSS for layout and styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -10,7 +17,7 @@
     <h1 class="text-center text-primary mb-1">My Trips</h1>
     <p class="text-center text-muted mb-4">Add your trips and create your personal travel log.</p>
 
-    <!-- Add Trip Form -->
+    <!-- # Form to add a new trip -->
     <div class="card mb-4">
         <div class="card-header bg-success text-white">Add New Trip</div>
         <div class="card-body">
@@ -42,7 +49,7 @@
         </div>
     </div>
 
-    <!-- Trip Table -->
+    <!-- # Table to display existing trips -->
     <table class="table table-striped table-bordered shadow-sm bg-white">
         <thead class="table-primary">
         <tr>
@@ -59,8 +66,10 @@
     </table>
 </div>
 
+<!-- # jQuery for making AJAX calls -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+    // # Create category dropdown options (used in edit mode)
     function categoryOptions(selectedId) {
         const categories = {
             1: 'Leisure',
@@ -77,6 +86,7 @@
         return html;
     }
 
+    // # Load all trips from the server and display them
     function loadTrips() {
         $.get("/trips", function(data) {
             let rows = "";
@@ -97,9 +107,11 @@
         });
     }
 
+    // # Initialize the page
     $(document).ready(function () {
         loadTrips();
 
+        // # Handle Add Trip form submission
         $("#trip-form").on("submit", function (e) {
             e.preventDefault();
             const trip = {
@@ -121,6 +133,7 @@
             });
         });
 
+        // # Toggle between Update and Save mode
         $("#trip-table-body").on("click", ".update-btn", function () {
             const row = $(this).closest("tr");
             const inputs = row.find("input");
@@ -151,6 +164,7 @@
             }
         });
 
+        // # Handle Delete button click
         $("#trip-table-body").on("click", ".delete-btn", function () {
             const row = $(this).closest("tr");
             const id = row.data("id");
