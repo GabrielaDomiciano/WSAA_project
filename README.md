@@ -71,8 +71,6 @@ You can access the live version of the project here:
 
 [Travel Log](https://gabidomiciano.pythonanywhere.com)
 
-> No installation required — the app is hosted on PythonAnywhere and ready to use.
-
 
 
 ### 📚 References
@@ -102,4 +100,7 @@ PythonAnywhere Flask Deployment Guide: https://www.youtube.com/watch?v=z7dYIKm4n
 AI tools were used to assist with debugging, such as fixing JSON handling issues and optimizing the update route logic, when data sent or received by the API was not being read correctly in JavaScript or Flask.
 
 
-### You will find additional references and comments throughout the project files.
+###### You will find comments throughout the project files.
+
+**********************************
+END
